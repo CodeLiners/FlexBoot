@@ -1,0 +1,20 @@
+local env = setmetatable({}, {__index = _G})
+env.loadfile = function( _sFile )
+    local file = fs.open( _sFile, "r" )
+    if file then
+        local func, err = loadstring( file.readAll(), fs.getName( _sFile ) )
+        file.close()
+        return func, err
+    end
+    return nil, "File not found"
+end
+
+local fn, err = env.loadfile("/bios/main.lua", "FlexBoot")
+if not fn then 
+    term.write("Bios error:")
+    term.setCursorPos(1, 2)
+    term.write(err)
+    return
+end
+setfenv(fn, env)
+return fn()
