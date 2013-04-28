@@ -27,5 +27,5 @@ function require( lib )
     return env
 end
 
-partsys = require('part');
-partsys.initpartitions
+partsys = require('part')
+partsys.initpartitions()
