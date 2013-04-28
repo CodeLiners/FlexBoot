@@ -1,4 +1,5 @@
 local env = setmetatable({}, {__index = _G})
+env.__ENV = env
 env.loadfile = function( _sFile )
     local file = fs.open( _sFile, "r" )
     if file then
